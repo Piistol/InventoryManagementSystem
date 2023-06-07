@@ -11,26 +11,15 @@ package inventorymanagementsystem;
  */
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class OrdersGUI {
 
     private JFrame frame;
     private JPanel contentPanel;
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    OrdersGUI window = new OrdersGUI();
-                    window.frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+    private JButton createSalesOrderButton;
+    private JButton createPurchaseOrderButton;
+    private JButton viewOrderButton;
+    private JButton mainMenuButton;
 
     public OrdersGUI() {
         initialize();
@@ -46,44 +35,41 @@ public class OrdersGUI {
         buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         frame.getContentPane().add(buttonPanel, BorderLayout.NORTH);
 
-        JButton createSalesOrderButton = new JButton("Create Sales Order");
-        createSalesOrderButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // handle create sales order
-                System.out.println("Create Sales Order button clicked. Implement logic here.");
-            }
-        });
+        createSalesOrderButton = new JButton("Create Sales Order");
         buttonPanel.add(createSalesOrderButton);
 
-        JButton createPurchaseOrderButton = new JButton("Create Purchase Order");
-        createPurchaseOrderButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // handle create purchase order
-                System.out.println("Create Purchase Order button clicked. Implement logic here.");
-            }
-        });
+        createPurchaseOrderButton = new JButton("Create Purchase Order");
         buttonPanel.add(createPurchaseOrderButton);
 
-        JButton viewOrderButton = new JButton("View Order");
-        viewOrderButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // handle view order
-                System.out.println("View Order button clicked. Implement logic here.");
-            }
-        });
+        viewOrderButton = new JButton("View Order");
         buttonPanel.add(viewOrderButton);
 
-        JButton mainMenuButton = new JButton("Main Menu");
-        mainMenuButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // handle main menu
-                System.out.println("Main Menu button clicked. Implement logic here.");
-            }
-        });
+        mainMenuButton = new JButton("Main Menu");
         buttonPanel.add(mainMenuButton);
 
         contentPanel = new JPanel();
         frame.getContentPane().add(contentPanel, BorderLayout.CENTER);
     }
+
+    public JFrame getFrame() {
+        return this.frame;
+    }
+
+    public JButton getCreateSalesOrderButton() {
+        return this.createSalesOrderButton;
+    }
+
+    public JButton getCreatePurchaseOrderButton() {
+        return this.createPurchaseOrderButton;
+    }
+
+    public JButton getViewOrderButton() {
+        return this.viewOrderButton;
+    }
+
+    public JButton getMainMenuButton() {
+        return this.mainMenuButton;
+    }
 }
+
 

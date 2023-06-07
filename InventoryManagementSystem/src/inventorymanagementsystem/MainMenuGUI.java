@@ -10,27 +10,16 @@ package inventorymanagementsystem;
  * @author GGPC
  */
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MainMenuGUI {
 
     private JFrame frame;
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    MainMenuGUI window = new MainMenuGUI();
-                    window.frame.setLocationRelativeTo(null);
-                    window.frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+    // declare buttons as class variables
+    private JButton inventoryButton;
+    private JButton customersButton;
+    private JButton ordersButton;
+    private JButton logoutButton;
 
     public MainMenuGUI() {
         initialize();
@@ -46,44 +35,43 @@ public class MainMenuGUI {
         MainMenuLabel.setBounds(125, 15, 400, 20);
         frame.getContentPane().add(MainMenuLabel);
 
-        JButton inventoryButton = new JButton("Manage inventory");
-        inventoryButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // handle inventory
-                System.out.println("Inventory button clicked. Implement inventory logic here.");
-            }
-        });
+        inventoryButton = new JButton("Manage inventory");
         inventoryButton.setBounds(50, 50, 200, 25);
         frame.getContentPane().add(inventoryButton);
 
-        JButton customersButton = new JButton("Customers and Suppliers");
-        customersButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // handle customers and suppliers
-                System.out.println("Customers and Suppliers button clicked. Implement customers logic here.");
-            }
-        });
+        customersButton = new JButton("Customers and Suppliers");
         customersButton.setBounds(50, 100, 200, 25);
         frame.getContentPane().add(customersButton);
 
-        JButton salesPurchasesButton = new JButton("Sales and Purchase Orders");
-        salesPurchasesButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // handle sales and purchase Orders
-                System.out.println("sales and purchase orders orders clicked. Implement logic here.");
-            }
-        });
-        salesPurchasesButton.setBounds(50, 150, 200, 25);
-        frame.getContentPane().add(salesPurchasesButton);
+        ordersButton = new JButton("Sales and Purchase Orders");
+        ordersButton.setBounds(50, 150, 200, 25);
+        frame.getContentPane().add(ordersButton);
 
-        JButton logoutButton = new JButton("Logout");
-        logoutButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // handle logout (return to loginGUI)
-                System.out.println("logout button clicked. Implement logic here.");
-            }
-        });
+        logoutButton = new JButton("Logout");
         logoutButton.setBounds(50, 200, 200, 25);
         frame.getContentPane().add(logoutButton);
     }
+
+    // getter methods for the buttons
+    public JButton getInventoryButton() {
+        return inventoryButton;
+    }
+
+    public JButton getCustomersButton() {
+        return customersButton;
+    }
+
+    public JButton getOrdersButton() {
+        return ordersButton;
+    }
+
+    public JButton getLogoutButton() {
+        return logoutButton;
+    }
+
+    // getter for the frame, to make it visible from the controller
+    public JFrame getFrame() {
+        return frame;
+    }
 }
+

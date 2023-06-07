@@ -15,26 +15,17 @@ package inventorymanagementsystem;
  */
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class CustomerSupplierGUI {
 
     private JFrame frame;
     private JPanel contentPanel;
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    CustomerSupplierGUI window = new CustomerSupplierGUI();
-                    window.frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+    private JButton addButton;
+    private JButton removeButton;
+    private JButton updateButton;
+    private JButton searchButton;
+    private JButton displayButton;
+    private JButton mainMenuButton;
 
     public CustomerSupplierGUI() {
         initialize();
@@ -50,63 +41,56 @@ public class CustomerSupplierGUI {
         buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         frame.getContentPane().add(buttonPanel, BorderLayout.NORTH);
 
-        JButton addButton = new JButton("Add Customer or Supplier");
-        addButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // handle add customer / supplier
-                System.out.println("add customer / supplier button clicked. Implement logic here.");
-            }
-        });
+        addButton = new JButton("Add Customer or Supplier");
         buttonPanel.add(addButton);
 
-        JButton removeButton = new JButton("Remove Customer or Supplier");
-        removeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // handle remove logic
-                System.out.println("remove button clicked. Implement logic here.");
-            }
-        });
+        removeButton = new JButton("Remove Customer or Supplier");
         buttonPanel.add(removeButton);
 
-        JButton updateButton = new JButton("Update Information");
-        updateButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // handle update information
-                System.out.println("update information button clicked. Implement logic here.");
-            }
-        });
+        updateButton = new JButton("Update Information");
         buttonPanel.add(updateButton);
         
-        JButton searchButton = new JButton("Search for Customer or Supplier");
-        searchButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // handle search
-                System.out.println("Search button clicked. Implement logic here.");
-            }
-        });
+        searchButton = new JButton("Search for Customer or Supplier");
         buttonPanel.add(searchButton);
         
-        JButton displayButton = new JButton("Display Information");
-        displayButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // handle update information
-                System.out.println("update information button clicked. Implement logic here.");
-            }
-        });
-        buttonPanel.add(searchButton);
+        displayButton = new JButton("Display Information");
+        buttonPanel.add(displayButton);
 
-        JButton mainMenuButton = new JButton("Main Menu");
-        mainMenuButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // handle main menu
-                System.out.println("Main Menu button clicked. Implement logic here.");
-            }
-        });
+        mainMenuButton = new JButton("Main Menu");
         buttonPanel.add(mainMenuButton);
 
         contentPanel = new JPanel();
         frame.getContentPane().add(contentPanel, BorderLayout.CENTER);
     }
+
+    public JFrame getFrame() {
+        return this.frame;
+    }
+
+    public JButton getAddButton() {
+        return this.addButton;
+    }
+
+    public JButton getRemoveButton() {
+        return this.removeButton;
+    }
+
+    public JButton getUpdateButton() {
+        return this.updateButton;
+    }
+
+    public JButton getSearchButton() {
+        return this.searchButton;
+    }
+
+    public JButton getDisplayButton() {
+        return this.displayButton;
+    }
+
+    public JButton getMainMenuButton() {
+        return this.mainMenuButton;
+    }
 }
+
 
 
