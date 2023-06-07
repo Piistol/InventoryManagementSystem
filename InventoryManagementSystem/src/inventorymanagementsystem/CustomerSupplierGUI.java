@@ -18,6 +18,8 @@ import java.awt.*;
 
 public class CustomerSupplierGUI {
 
+    private static CustomerSupplierGUI instance = null;
+
     private JFrame frame;
     private JPanel contentPanel;
     private JButton addButton;
@@ -27,8 +29,15 @@ public class CustomerSupplierGUI {
     private JButton displayButton;
     private JButton mainMenuButton;
 
-    public CustomerSupplierGUI() {
+    private CustomerSupplierGUI() {
         initialize();
+    }
+
+    public static CustomerSupplierGUI getInstance() {
+        if (instance == null) {
+            instance = new CustomerSupplierGUI();
+        }
+        return instance;
     }
 
     private void initialize() {
@@ -91,6 +100,7 @@ public class CustomerSupplierGUI {
         return this.mainMenuButton;
     }
 }
+
 
 
 

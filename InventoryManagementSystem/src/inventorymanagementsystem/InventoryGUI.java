@@ -14,6 +14,8 @@ import java.awt.*;
 
 public class InventoryGUI {
 
+    private static InventoryGUI instance = null;
+
     private JFrame frame;
     private JPanel contentPanel;
     private JButton displayInventoryButton;
@@ -23,8 +25,15 @@ public class InventoryGUI {
     private JButton generateReportButton;
     private JButton mainMenuButton;
 
-    public InventoryGUI() {
+    private InventoryGUI() {
         initialize();
+    }
+
+    public static InventoryGUI getInstance() {
+        if (instance == null) {
+            instance = new InventoryGUI();
+        }
+        return instance;
     }
 
     private void initialize() {
@@ -87,4 +96,5 @@ public class InventoryGUI {
         return this.mainMenuButton;
     }
 }
+
 

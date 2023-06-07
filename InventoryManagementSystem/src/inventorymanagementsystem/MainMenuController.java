@@ -12,14 +12,12 @@ public class MainMenuController {
     private CustomerSupplierGUI customerSupplierGUI;
     private LoginGUI loginGUI;
 
-    // Assume constructors for the GUIs are already defined and initialize them
-
     public MainMenuController() {
-        mainMenuGUI = new MainMenuGUI();
-        ordersGUI = new OrdersGUI();
-        inventoryGUI = new InventoryGUI();
-        customerSupplierGUI = new CustomerSupplierGUI();
-        loginGUI = new LoginGUI();
+        mainMenuGUI = MainMenuGUI.getInstance();
+        ordersGUI = OrdersGUI.getInstance();
+        inventoryGUI = InventoryGUI.getInstance();
+        customerSupplierGUI = CustomerSupplierGUI.getInstance();
+        loginGUI = LoginGUI.getInstance();
 
         mainMenuGUI.getOrdersButton().addActionListener(e -> openOrdersGUI());
         mainMenuGUI.getInventoryButton().addActionListener(e -> openInventoryGUI());

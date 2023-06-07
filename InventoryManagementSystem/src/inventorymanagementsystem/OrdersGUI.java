@@ -14,6 +14,8 @@ import java.awt.*;
 
 public class OrdersGUI {
 
+    private static OrdersGUI instance = null;
+
     private JFrame frame;
     private JPanel contentPanel;
     private JButton createSalesOrderButton;
@@ -21,8 +23,15 @@ public class OrdersGUI {
     private JButton viewOrderButton;
     private JButton mainMenuButton;
 
-    public OrdersGUI() {
+    private OrdersGUI() {
         initialize();
+    }
+
+    public static OrdersGUI getInstance() {
+        if (instance == null) {
+            instance = new OrdersGUI();
+        }
+        return instance;
     }
 
     private void initialize() {
@@ -71,5 +80,6 @@ public class OrdersGUI {
         return this.mainMenuButton;
     }
 }
+
 
 

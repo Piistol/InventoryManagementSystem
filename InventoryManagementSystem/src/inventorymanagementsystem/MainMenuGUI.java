@@ -13,16 +13,25 @@ import javax.swing.*;
 
 public class MainMenuGUI {
 
-    private JFrame frame;
+    private static MainMenuGUI instance = null;
 
-    // declare buttons as class variables
+    private JFrame frame;
     private JButton inventoryButton;
     private JButton customersButton;
     private JButton ordersButton;
     private JButton logoutButton;
 
-    public MainMenuGUI() {
+    // Making the constructor private to prevent instantiation
+    private MainMenuGUI() {
         initialize();
+    }
+
+    // Providing global point of access
+    public static MainMenuGUI getInstance() {
+        if (instance == null) {
+            instance = new MainMenuGUI();
+        }
+        return instance;
     }
 
     private void initialize() {
@@ -30,7 +39,7 @@ public class MainMenuGUI {
         frame.setBounds(100, 100, 300, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
-        
+
         JLabel MainMenuLabel = new JLabel("Main Menu");
         MainMenuLabel.setBounds(125, 15, 400, 20);
         frame.getContentPane().add(MainMenuLabel);
@@ -52,7 +61,6 @@ public class MainMenuGUI {
         frame.getContentPane().add(logoutButton);
     }
 
-    // getter methods for the buttons
     public JButton getInventoryButton() {
         return inventoryButton;
     }
@@ -69,9 +77,9 @@ public class MainMenuGUI {
         return logoutButton;
     }
 
-    // getter for the frame, to make it visible from the controller
     public JFrame getFrame() {
         return frame;
     }
 }
+
 

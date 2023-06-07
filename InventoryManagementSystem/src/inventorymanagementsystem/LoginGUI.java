@@ -13,19 +13,30 @@ import javax.swing.*;
 
 public class LoginGUI {
 
+    private static LoginGUI instance = null;
+
     private JFrame frame;
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JButton loginButton;
     private JButton registerButton;
 
-    public LoginGUI() {
+    // Making the constructor private to prevent instantiation
+    private LoginGUI() {
         initialize();
+    }
+
+    // Providing global point of access
+    public static LoginGUI getInstance() {
+        if (instance == null) {
+            instance = new LoginGUI();
+        }
+        return instance;
     }
 
     private void initialize() {
         frame = new JFrame();
-        frame.setBounds(100, 100, 350, 250); 
+        frame.setBounds(100, 100, 350, 250);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
@@ -83,4 +94,5 @@ public class LoginGUI {
         return this.registerButton;
     }
 }
+
 
