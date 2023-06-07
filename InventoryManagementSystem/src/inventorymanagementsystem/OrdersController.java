@@ -5,6 +5,11 @@
  */
 package inventorymanagementsystem;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+
 /**
  *
  * @author GGPC
@@ -19,12 +24,30 @@ public class OrdersController {
         ordersGUI = OrdersGUI.getInstance();
         
         ordersGUI.getMainMenuButton().addActionListener(e -> openMainMenuGUI());
+        ordersGUI.getViewOrderButton().addActionListener(e -> viewOrders());
         
     }
     
     private void openMainMenuGUI() {
         ordersGUI.getFrame().setVisible(false);
         mainMenuGUI.getFrame().setVisible(true);
+    }
+    
+    private void viewOrders() {
+        JFileChooser imageFileChooser = new JFileChooser();
+        imageFileChooser.setCurrentDirectory(new File("orders"));
+        
+        int result = imageFileChooser.showOpenDialog(ordersGUI.getFrame());
+        
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = imageFileChooser.getSelectedFile();
+            
+            try {
+                Desktop.getDesktop().open(selectedFile);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
     
 }
