@@ -43,7 +43,7 @@ public class MainMenuGUI {
         frame.getContentPane().setLayout(null);
         
         JLabel MainMenuLabel = new JLabel("Main Menu");
-        MainMenuLabel.setBounds(100, 10, 400, 20);
+        MainMenuLabel.setBounds(125, 15, 400, 20);
         frame.getContentPane().add(MainMenuLabel);
 
         JButton inventoryButton = new JButton("Manage inventory");
