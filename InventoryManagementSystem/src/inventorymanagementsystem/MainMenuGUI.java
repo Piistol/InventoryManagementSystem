@@ -17,16 +17,18 @@ public class MainMenuGUI {
 
     private JFrame frame;
     private JButton inventoryButton;
-    private JButton customersButton;
+    private JButton addButton;
+    private JButton removeButton;
+    private JButton searchButton;
+    private JButton reportButton;
     private JButton ordersButton;
+    private JButton viewOrdersButton;
     private JButton logoutButton;
 
-    // Making the constructor private to prevent instantiation
     private MainMenuGUI() {
         initialize();
     }
 
-    // Providing global point of access
     public static MainMenuGUI getInstance() {
         if (instance == null) {
             instance = new MainMenuGUI();
@@ -36,7 +38,7 @@ public class MainMenuGUI {
 
     private void initialize() {
         frame = new JFrame();
-        frame.setBounds(100, 100, 300, 300);
+        frame.setBounds(75, 100, 300, 400); // Increase the height to fit the additional buttons
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
@@ -44,20 +46,24 @@ public class MainMenuGUI {
         MainMenuLabel.setBounds(125, 15, 400, 20);
         frame.getContentPane().add(MainMenuLabel);
 
-        inventoryButton = new JButton("Manage inventory");
+        inventoryButton = new JButton("Display Inventory");
         inventoryButton.setBounds(50, 50, 200, 25);
         frame.getContentPane().add(inventoryButton);
 
-        customersButton = new JButton("Customers and Suppliers");
-        customersButton.setBounds(50, 100, 200, 25);
-        frame.getContentPane().add(customersButton);
+        addButton = new JButton("Add/ Remove/ Search");
+        addButton.setBounds(50, 90, 200, 25);
+        frame.getContentPane().add(addButton);
 
-        ordersButton = new JButton("Sales and Purchase Orders");
-        ordersButton.setBounds(50, 150, 200, 25);
+        reportButton = new JButton("Inventory Report");
+        reportButton.setBounds(50, 130, 200, 25);
+        frame.getContentPane().add(reportButton);
+
+        ordersButton = new JButton("Orders");
+        ordersButton.setBounds(50, 170, 200, 25);
         frame.getContentPane().add(ordersButton);
 
         logoutButton = new JButton("Logout");
-        logoutButton.setBounds(50, 200, 200, 25);
+        logoutButton.setBounds(50, 210, 200, 25);
         frame.getContentPane().add(logoutButton);
     }
 
@@ -65,8 +71,12 @@ public class MainMenuGUI {
         return inventoryButton;
     }
 
-    public JButton getCustomersButton() {
-        return customersButton;
+    public JButton getAddButton() {
+        return addButton;
+    }
+
+    public JButton getReportButton() {
+        return reportButton;
     }
 
     public JButton getOrdersButton() {
@@ -81,5 +91,6 @@ public class MainMenuGUI {
         return frame;
     }
 }
+
 
 

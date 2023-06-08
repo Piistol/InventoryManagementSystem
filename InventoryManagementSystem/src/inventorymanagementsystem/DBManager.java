@@ -5,37 +5,31 @@
  */
 package inventorymanagementsystem;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
-/**
- *
- * @author GGPC
- */
 public class DBManager {
-    
-    Connection connection;
-    
-    private static final String URL = "jdbc:derby:InventoryDB;create=true";  //url of the DB
-    
-    public DBManager()
-    {
+
+    private Connection connection;
+    private Statement statement;
+    private static final String URL = "jdbc:derby:InventoryDB;create=true";
+
+    public DBManager() {
         establishConnection();
     }
-    
-    //Establish database connection
+
     public void establishConnection() {
         if (this.connection == null) {
             try {
-                connection = DriverManager.getConnection(URL);
+                connection = DriverManager.getConnection(URL, "", "");
+                statement = connection.createStatement();
                 System.out.println(URL + " Get Connected Successfully ....");
+                createTables();
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
             }
         }
     }
-    
+
     public void closeConnections() {
         if (connection != null) {
             try {
@@ -45,13 +39,65 @@ public class DBManager {
             }
         }
     }
-    
+
     public Connection getConnection() {
         return this.connection;
     }
-    
+
+    public void createTables() {
+        try {
+            
+
+            if (!tableExists("PRODUCT")) {
+                statement.execute("CREATE TABLE PRODUCT(ID VARCHAR(5), NAME VARCHAR(35), PRICE DOUBLE PRECISION, WEIGHT DOUBLE PRECISION)");
+                connection.commit();
+                System.out.println("Product table created");
+            } else {
+                System.out.println("Product table already exists");
+            }
+
+           
+
+            if (!tableExists("APP_USER")) {
+                statement.execute("CREATE TABLE APP_USER(USERNAME VARCHAR(20), PASSWORD VARCHAR(20), ROLE VARCHAR(10))");
+                connection.commit();
+                System.out.println("APP_USER table created");
+            } else {
+                System.out.println("APP_USER table already exists");
+            }
+        } catch (SQLException ex) {
+            System.out.println("SQL exception: " + ex.getMessage());
+        }
+    }
+
+    public boolean tableExists(String tableName) {
+        try {
+            DatabaseMetaData dbm = connection.getMetaData();
+
+            ResultSet tables = dbm.getTables(null, "APP", tableName.toUpperCase(), null);
+            while (tables.next()) {
+                System.out.println(tables.getString("TABLE_CAT"));
+                System.out.println(tables.getString("TABLE_SCHEM"));
+                System.out.println(tables.getString("TABLE_NAME"));
+                System.out.println(tables.getString("TABLE_TYPE"));
+            }
+            if (tables.next()) {
+                // Table exists
+                return true;
+            } else {
+                // Table does not exist
+                return false;
+            }
+        } catch (SQLException ex) {
+            System.out.println("SQL exception: " + ex.getMessage());
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
     public static void main(String[] args) {
         DBManager dbManager = new DBManager();
         System.out.println(dbManager.getConnection());
+        dbManager.closeConnections();
     }
 }

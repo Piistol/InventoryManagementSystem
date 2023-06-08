@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package inventorymanagementsystem;
 
-/**
- *
- * @author GGPC
- */
 import javax.swing.*;
 import java.awt.*;
 
@@ -24,6 +15,10 @@ public class InventoryGUI {
     private JButton updateStockButton;
     private JButton generateReportButton;
     private JButton mainMenuButton;
+    private JTextField idField;
+    private JTextField nameField;
+    private JTextField priceField;
+    private JTextField weightField;
 
     private InventoryGUI() {
         initialize();
@@ -43,58 +38,28 @@ public class InventoryGUI {
         frame.getContentPane().setLayout(new BorderLayout());
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+       
         frame.getContentPane().add(buttonPanel, BorderLayout.NORTH);
 
-        displayInventoryButton = new JButton("Display Inventory");
-        buttonPanel.add(displayInventoryButton);
-
-        addProductButton = new JButton("Add Product");
-        buttonPanel.add(addProductButton);
-
-        removeProductButton = new JButton("Remove Product");
-        buttonPanel.add(removeProductButton);
-
-        updateStockButton = new JButton("Update Stock Levels");
-        buttonPanel.add(updateStockButton);
-
-        generateReportButton = new JButton("Generate Inventory Report");
-        buttonPanel.add(generateReportButton);
+       
 
         mainMenuButton = new JButton("Main Menu");
         buttonPanel.add(mainMenuButton);
 
-        contentPanel = new JPanel();
-        frame.getContentPane().add(contentPanel, BorderLayout.CENTER);
+        
+
+        frame.setVisible(false);
     }
 
     public JFrame getFrame() {
         return this.frame;
     }
 
-    public JButton getDisplayInventoryButton() {
-        return this.displayInventoryButton;
-    }
-
-    public JButton getAddProductButton() {
-        return this.addProductButton;
-    }
-
-    public JButton getRemoveProductButton() {
-        return this.removeProductButton;
-    }
-
-    public JButton getUpdateStockButton() {
-        return this.updateStockButton;
-    }
-
-    public JButton getGenerateReportButton() {
-        return this.generateReportButton;
-    }
-
+    
     public JButton getMainMenuButton() {
         return this.mainMenuButton;
     }
+
+    
+
 }
-
-

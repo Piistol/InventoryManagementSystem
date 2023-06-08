@@ -6,28 +6,29 @@
 package inventorymanagementsystem;
 
 public class MainMenuController {
+
     private MainMenuGUI mainMenuGUI;
     private OrdersGUI ordersGUI;
     private InventoryGUI inventoryGUI;
-    private CustomerSupplierGUI customerSupplierGUI;
+    private ProductGUI productGUI;
+    private ReportGUI reportGUI;
+    private OrdersGUI createOrderGUI;
     private LoginGUI loginGUI;
 
     public MainMenuController() {
         mainMenuGUI = MainMenuGUI.getInstance();
         ordersGUI = OrdersGUI.getInstance();
         inventoryGUI = InventoryGUI.getInstance();
-        customerSupplierGUI = CustomerSupplierGUI.getInstance();
+        productGUI = ProductGUI.getInstance();
+        reportGUI = ReportGUI.getInstance();
+        createOrderGUI = OrdersGUI.getInstance();
         loginGUI = LoginGUI.getInstance();
 
-        mainMenuGUI.getOrdersButton().addActionListener(e -> openOrdersGUI());
         mainMenuGUI.getInventoryButton().addActionListener(e -> openInventoryGUI());
-        mainMenuGUI.getCustomersButton().addActionListener(e -> openCustomerSupplierGUI());
+        mainMenuGUI.getAddButton().addActionListener(e -> productGUI());
+        mainMenuGUI.getReportButton().addActionListener(e -> openReportGUI());
+        mainMenuGUI.getOrdersButton().addActionListener(e -> openOrdersGUI());
         mainMenuGUI.getLogoutButton().addActionListener(e -> openLoginGUI());
-    }
-
-    private void openOrdersGUI() {
-        ordersGUI.getFrame().setVisible(true);
-        mainMenuGUI.getFrame().setVisible(false);
     }
 
     private void openInventoryGUI() {
@@ -35,8 +36,18 @@ public class MainMenuController {
         mainMenuGUI.getFrame().setVisible(false);
     }
 
-    private void openCustomerSupplierGUI() {
-        customerSupplierGUI.getFrame().setVisible(true);
+    private void productGUI() {
+        productGUI.getFrame().setVisible(true);
+        mainMenuGUI.getFrame().setVisible(false);
+    }
+
+    private void openReportGUI() {
+        reportGUI.getFrame().setVisible(true);
+        mainMenuGUI.getFrame().setVisible(false);
+    }
+
+    private void openOrdersGUI() {
+        ordersGUI.getFrame().setVisible(true);
         mainMenuGUI.getFrame().setVisible(false);
     }
 
@@ -45,4 +56,5 @@ public class MainMenuController {
         mainMenuGUI.getFrame().setVisible(false);
     }
 }
+
 
