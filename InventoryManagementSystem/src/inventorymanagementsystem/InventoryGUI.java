@@ -65,7 +65,7 @@ public class InventoryGUI {
         List<Product> products = Product.getAllProducts();
 
         // Create column names
-        String[] columnNames = {"ID", "Name", "Price", "Weight", "Quantity"};
+        String[] columnNames = {"Name", "Price", "Weight", "Quantity"};
 
         // Create 2D array for table data
         Object[][] data = new Object[products.size()][columnNames.length];
@@ -73,11 +73,10 @@ public class InventoryGUI {
         // Populate the data array with products
         for (int i = 0; i < products.size(); i++) {
             Product product = products.get(i);
-            data[i][0] = product.getId();
-            data[i][1] = product.getName();
-            data[i][2] = product.getPrice();
-            data[i][3] = product.getWeight();
-            data[i][4] = product.getQuantity();
+            data[i][0] = product.getName();
+            data[i][1] = product.getPrice();
+            data[i][2] = product.getWeight();
+            data[i][3] = product.getQuantity();
         }
 
         // Create a new TableModel

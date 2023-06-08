@@ -82,7 +82,7 @@ public class LoginController {
             System.out.println(e.getMessage());
         }
 
-        String insertSql = "INSERT INTO APP_USER (USERNAME, PASSWORD, ROLE) VALUES (?, ?, 'user')";
+        String insertSql = "INSERT INTO APP_USER (USERNAME, PASSWORD) VALUES (?, ?)";
 
         try (PreparedStatement pstmt = dbmanager.getConnection().prepareStatement(insertSql)) {
             pstmt.setString(1, username);

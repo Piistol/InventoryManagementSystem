@@ -17,7 +17,7 @@ public class DBManager {
     private DBManager() {
         establishConnection();
     }
-    
+
     public static DBManager getInstance() {
         if (instance == null) {
             instance = new DBManager();
@@ -54,20 +54,17 @@ public class DBManager {
 
     public void createTables() {
         try {
-            
 
             if (!tableExists("PRODUCT")) {
-                statement.execute("CREATE TABLE PRODUCT(ID VARCHAR(5), NAME VARCHAR(35), PRICE DOUBLE PRECISION, WEIGHT DOUBLE PRECISION, QUANTITY INTEGER)");
+                statement.execute("CREATE TABLE PRODUCT(NAME VARCHAR(35), PRICE DOUBLE PRECISION, WEIGHT DOUBLE PRECISION, QUANTITY INTEGER)");
                 connection.commit();
                 System.out.println("Product table created");
             } else {
                 System.out.println("Product table already exists");
             }
 
-           
-
             if (!tableExists("APP_USER")) {
-                statement.execute("CREATE TABLE APP_USER(USERNAME VARCHAR(20), PASSWORD VARCHAR(20), ROLE VARCHAR(10))");
+                statement.execute("CREATE TABLE APP_USER(USERNAME VARCHAR(20), PASSWORD VARCHAR(20))");
                 connection.commit();
                 System.out.println("APP_USER table created");
             } else {
