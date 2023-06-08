@@ -8,6 +8,8 @@ public class InventoryController {
     public InventoryController() {
         mainMenuGUI = MainMenuGUI.getInstance();
         inventoryGUI = InventoryGUI.getInstance();
+        
+        inventoryGUI.getDisplayInventoryButton().addActionListener(e -> inventoryGUI.displayInventory());
 
         inventoryGUI.getMainMenuButton().addActionListener(e -> openMainMenuGUI()); 
     }

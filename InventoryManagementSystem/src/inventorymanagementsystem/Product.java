@@ -6,6 +6,8 @@
 package inventorymanagementsystem;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -60,7 +62,7 @@ public class Product {
     public void setWeight(double weight) {
         this.weight = weight;
     }
-    
+
     public int getQuantity() {
         return this.quantity;
     }
@@ -72,14 +74,14 @@ public class Product {
                 + ", name='" + name + '\''
                 + ", price=$" + String.format("%.2f", price)
                 + ", weight=" + String.format("%.2f", weight) + "g"
-                +", quantity=" + this.getQuantity()
+                + ", quantity=" + this.getQuantity()
                 + '}';
     }
-    
+
     private static synchronized String generateId() {
         return "P" + nextId++;
     }
-    
+
     public static boolean addProduct(Product product) {
         String query = "INSERT INTO PRODUCT (ID, NAME, PRICE, WEIGHT, QUANTITY) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(query)) {
@@ -128,5 +130,26 @@ public class Product {
             System.out.println(ex.getMessage());
             return null;
         }
+    }
+
+    public static List<Product> getAllProducts() {
+        String query = "SELECT * FROM PRODUCT";
+        List<Product> products = new ArrayList<>();
+        try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(query)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String id = rs.getString("ID");
+                String name = rs.getString("NAME");
+                double price = rs.getDouble("PRICE");
+                double weight = rs.getDouble("WEIGHT");
+                int quantity = rs.getInt("QUANTITY");
+                Product product = new Product(name, price, weight, quantity);
+                product.setId(id);
+                products.add(product);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return products;
     }
 }
