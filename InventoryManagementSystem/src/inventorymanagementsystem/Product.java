@@ -5,6 +5,8 @@
  */
 package inventorymanagementsystem;
 
+import java.sql.*;
+
 /**
  *
  * @author GGPC
@@ -15,12 +17,15 @@ public class Product {
     private String name;
     private double price;
     private double weight;
+    private int quantity;
     private static int nextId = 1;
+    private static DBManager dbManager = DBManager.getInstance();
 
-    public Product(String name, double price, double weight) {
+    public Product(String name, double price, double weight, int quantity) {
         this.name = name;
         this.price = price;
         this.weight = weight;
+        this.quantity = quantity;
         this.id = generateId();
     }
 
@@ -55,6 +60,10 @@ public class Product {
     public void setWeight(double weight) {
         this.weight = weight;
     }
+    
+    public int getQuantity() {
+        return this.quantity;
+    }
 
     @Override
     public String toString() {
@@ -63,10 +72,61 @@ public class Product {
                 + ", name='" + name + '\''
                 + ", price=$" + String.format("%.2f", price)
                 + ", weight=" + String.format("%.2f", weight) + "g"
+                +", quantity=" + this.getQuantity()
                 + '}';
     }
     
     private static synchronized String generateId() {
         return "P" + nextId++;
+    }
+    
+    public static boolean addProduct(Product product) {
+        String query = "INSERT INTO PRODUCT (ID, NAME, PRICE, WEIGHT, QUANTITY) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(query)) {
+            stmt.setString(1, generateId());
+            stmt.setString(2, product.getName());
+            stmt.setDouble(3, product.getPrice());
+            stmt.setDouble(4, product.getWeight());
+            stmt.setInt(5, product.getQuantity());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+
+    public static boolean removeProduct(String name) {
+        String query = "DELETE FROM PRODUCT WHERE NAME = ?";
+        try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(query)) {
+            stmt.setString(1, name);
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return false;
+        }
+    }
+
+    public static Product searchProduct(String name) {
+        String query = "SELECT * FROM PRODUCT WHERE NAME = ?";
+        try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(query)) {
+            stmt.setString(1, name);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                String id = rs.getString("ID");
+                double price = rs.getDouble("PRICE");
+                double weight = rs.getDouble("WEIGHT");
+                int quantity = rs.getInt("QUANTITY");
+                Product product = new Product(name, price, weight, quantity);
+                product.setId(id);
+                return product;
+            } else {
+                return null;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return null;
+        }
     }
 }

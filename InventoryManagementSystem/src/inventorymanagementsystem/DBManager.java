@@ -9,12 +9,20 @@ import java.sql.*;
 
 public class DBManager {
 
+    private static DBManager instance = null;
     private Connection connection;
     private Statement statement;
     private static final String URL = "jdbc:derby:InventoryDB;create=true";
 
-    public DBManager() {
+    private DBManager() {
         establishConnection();
+    }
+    
+    public static DBManager getInstance() {
+        if (instance == null) {
+            instance = new DBManager();
+        }
+        return instance;
     }
 
     public void establishConnection() {
@@ -49,7 +57,7 @@ public class DBManager {
             
 
             if (!tableExists("PRODUCT")) {
-                statement.execute("CREATE TABLE PRODUCT(ID VARCHAR(5), NAME VARCHAR(35), PRICE DOUBLE PRECISION, WEIGHT DOUBLE PRECISION)");
+                statement.execute("CREATE TABLE PRODUCT(ID VARCHAR(5), NAME VARCHAR(35), PRICE DOUBLE PRECISION, WEIGHT DOUBLE PRECISION, QUANTITY INTEGER)");
                 connection.commit();
                 System.out.println("Product table created");
             } else {
@@ -74,7 +82,7 @@ public class DBManager {
         try {
             DatabaseMetaData dbm = connection.getMetaData();
 
-            ResultSet tables = dbm.getTables(null, "APP", tableName.toUpperCase(), null);
+            ResultSet tables = dbm.getTables(null, null, tableName.toUpperCase(), null);
             while (tables.next()) {
                 System.out.println(tables.getString("TABLE_CAT"));
                 System.out.println(tables.getString("TABLE_SCHEM"));

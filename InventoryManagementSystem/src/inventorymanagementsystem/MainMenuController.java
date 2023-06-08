@@ -12,7 +12,6 @@ public class MainMenuController {
     private InventoryGUI inventoryGUI;
     private ProductGUI productGUI;
     private ReportGUI reportGUI;
-    private OrdersGUI createOrderGUI;
     private LoginGUI loginGUI;
 
     public MainMenuController() {
@@ -21,7 +20,6 @@ public class MainMenuController {
         inventoryGUI = InventoryGUI.getInstance();
         productGUI = ProductGUI.getInstance();
         reportGUI = ReportGUI.getInstance();
-        createOrderGUI = OrdersGUI.getInstance();
         loginGUI = LoginGUI.getInstance();
 
         mainMenuGUI.getInventoryButton().addActionListener(e -> openInventoryGUI());

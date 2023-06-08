@@ -20,7 +20,9 @@ public class InventoryManagementSystem {
         new MainMenuController();
         new InventoryController();
         new OrdersController();
-        new DBManager();
+        new ProductController();
+        new ReportController();
+        DBManager.getInstance();
         
     }
     

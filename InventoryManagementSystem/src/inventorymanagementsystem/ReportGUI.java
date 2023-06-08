@@ -1,22 +1,31 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package inventorymanagementsystem;
 
+/**
+ *
+ * @author GGPC
+ */
 import javax.swing.*;
 import java.awt.*;
 
-public class InventoryGUI {
+public class ReportGUI {
 
-    private static InventoryGUI instance = null;
+    private static ReportGUI instance = null;
 
     private JFrame frame;
     private JButton mainMenuButton;
 
-    private InventoryGUI() {
+    private ReportGUI() {
         initialize();
     }
 
-    public static InventoryGUI getInstance() {
+    public static ReportGUI getInstance() {
         if (instance == null) {
-            instance = new InventoryGUI();
+            instance = new ReportGUI();
         }
         return instance;
     }
