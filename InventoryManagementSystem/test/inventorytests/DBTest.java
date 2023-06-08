@@ -34,8 +34,8 @@ public class DBTest {
             statement.execute("INSERT INTO PRODUCT (ID, NAME, PRICE, WEIGHT) VALUES ('P2', 'Product2', 200.0, 10.0)");
 
             // Populate the APP_USER table
-            statement.execute("INSERT INTO APP_USER (USERNAME, PASSWORD, ROLE) VALUES ('user1', 'password1', 'admin')");
-            statement.execute("INSERT INTO APP_USER (USERNAME, PASSWORD, ROLE) VALUES ('user2', 'password2', 'user')");
+            statement.execute("INSERT INTO APP_USER (USERNAME, PASSWORD) VALUES ('user1', 'password1')");
+            statement.execute("INSERT INTO APP_USER (USERNAME, PASSWORD) VALUES ('user2', 'password2')");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -55,8 +55,7 @@ public class DBTest {
             ResultSet rsUser = statement.executeQuery("SELECT * FROM APP_USER");
             System.out.println("\nData in APP_USER table:");
             while (rsUser.next()) {
-                System.out.println("Username: " + rsUser.getString("USERNAME") + ", Password: " + rsUser.getString("PASSWORD") 
-                    + ", Role: " + rsUser.getString("ROLE"));
+                System.out.println("Username: " + rsUser.getString("USERNAME") + ", Password: " + rsUser.getString("PASSWORD"));
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

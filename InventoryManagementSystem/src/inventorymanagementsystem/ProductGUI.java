@@ -83,7 +83,7 @@ public class ProductGUI {
         c.gridx = 0;
         c.gridy = 2;
         c.fill = GridBagConstraints.NONE;
-        JLabel weightLabel = new JLabel("Weight (grams):");
+        JLabel weightLabel = new JLabel("Weight (kg):");
         fieldPanel.add(weightLabel, c);
 
         c.gridx = 1;

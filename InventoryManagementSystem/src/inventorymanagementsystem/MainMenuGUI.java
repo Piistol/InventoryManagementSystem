@@ -18,11 +18,7 @@ public class MainMenuGUI {
     private JFrame frame;
     private JButton inventoryButton;
     private JButton addButton;
-    private JButton removeButton;
-    private JButton searchButton;
-    private JButton reportButton;
     private JButton ordersButton;
-    private JButton viewOrdersButton;
     private JButton logoutButton;
 
     private MainMenuGUI() {
@@ -54,16 +50,12 @@ public class MainMenuGUI {
         addButton.setBounds(50, 90, 200, 25);
         frame.getContentPane().add(addButton);
 
-        reportButton = new JButton("Inventory Report");
-        reportButton.setBounds(50, 130, 200, 25);
-        frame.getContentPane().add(reportButton);
-
         ordersButton = new JButton("Orders");
-        ordersButton.setBounds(50, 170, 200, 25);
+        ordersButton.setBounds(50, 130, 200, 25);
         frame.getContentPane().add(ordersButton);
 
         logoutButton = new JButton("Logout");
-        logoutButton.setBounds(50, 210, 200, 25);
+        logoutButton.setBounds(50, 170, 200, 25);
         frame.getContentPane().add(logoutButton);
     }
 
@@ -73,10 +65,6 @@ public class MainMenuGUI {
 
     public JButton getAddButton() {
         return addButton;
-    }
-
-    public JButton getReportButton() {
-        return reportButton;
     }
 
     public JButton getOrdersButton() {

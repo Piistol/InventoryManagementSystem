@@ -18,10 +18,9 @@ public class InventoryManagementSystem {
         
         new LoginController();
         new MainMenuController();
-        new InventoryController();
+        InventoryController.getInstance();
         new OrdersController();
         new ProductController();
-        new ReportController();
         DBManager.getInstance();
         
     }

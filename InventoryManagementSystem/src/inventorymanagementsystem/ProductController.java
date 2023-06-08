@@ -15,12 +15,10 @@ public class ProductController {
 
     private MainMenuGUI mainMenuGUI;
     private ProductGUI productGUI;
-    private DBManager dbManager;
 
     public ProductController() {
         mainMenuGUI = MainMenuGUI.getInstance();
         productGUI = ProductGUI.getInstance();
-        dbManager = DBManager.getInstance();
 
         productGUI.getMainMenuButton().addActionListener(e -> openMainMenuGUI());
         productGUI.getAddButton().addActionListener(e -> addProduct());

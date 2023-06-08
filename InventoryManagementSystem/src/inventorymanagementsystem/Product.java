@@ -27,7 +27,7 @@ public class Product {
         this.weight = weight;
         this.quantity = quantity;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -74,7 +74,7 @@ public class Product {
             stmt.setDouble(3, product.getWeight());
             stmt.setInt(4, product.getQuantity());
             stmt.executeUpdate();
-           
+
             return true;
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -104,7 +104,7 @@ public class Product {
                 double weight = rs.getDouble("WEIGHT");
                 int quantity = rs.getInt("QUANTITY");
                 Product product = new Product(name, price, weight, quantity);
-               
+
                 return product;
             } else {
                 return null;
@@ -133,4 +133,77 @@ public class Product {
         }
         return products;
     }
+
+    public static double getInventorySum() {
+        String query = "SELECT SUM(PRICE * QUANTITY) AS total FROM PRODUCT";
+        double total = 0;
+        try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(query)) {
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                total = rs.getDouble("total");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return total;
+    }
+
+    public static List<Product> getLowStockProducts() {
+        String query = "SELECT * FROM PRODUCT WHERE QUANTITY <= 5";
+        List<Product> products = new ArrayList<>();
+        try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(query)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String name = rs.getString("NAME");
+                double price = rs.getDouble("PRICE");
+                double weight = rs.getDouble("WEIGHT");
+                int quantity = rs.getInt("QUANTITY");
+                Product product = new Product(name, price, weight, quantity);
+                products.add(product);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return products;
+    }
+
+    public static int getTotalItems() {
+        String query = "SELECT SUM(QUANTITY) AS TOTAL FROM PRODUCT";
+        try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(query)) {
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("TOTAL");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return 0;
+    }
+
+    public static int getTotalUniqueItems() {
+        String query = "SELECT COUNT(*) AS TOTAL FROM PRODUCT";
+        try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(query)) {
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("TOTAL");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return 0;
+    }
+    
+    public static int getTotalWeight() {
+        String query = "SELECT SUM(WEIGHT) AS TOTAL FROM PRODUCT";
+        try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(query)) {
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("TOTAL");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return 0;
+    }
+
 }
