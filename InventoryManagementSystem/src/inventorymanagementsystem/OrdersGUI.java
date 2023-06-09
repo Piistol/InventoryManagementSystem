@@ -92,7 +92,10 @@ public class OrdersGUI {
         itemsDropdown = new JComboBox<>(productNames);
         topPanel.add(itemsDropdown);
 
-        quantityField = new JTextField(10);
+        JLabel quantityLabel = new JLabel("Quantity:");
+        topPanel.add(quantityLabel);
+        
+        quantityField = new JTextField(2);
         topPanel.add(quantityField);
 
         contentPanel.add(topPanel, BorderLayout.NORTH);

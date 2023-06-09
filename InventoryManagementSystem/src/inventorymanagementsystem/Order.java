@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package inventorymanagementsystem;
 
 import java.io.BufferedWriter;
@@ -12,16 +7,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
-/**
- *
- * @author GGPC
- */
 public class Order {
 
     private String name;
     private Date date;
     private String type;
-    private Double totalPrice;
     private HashMap<String, Integer> items = new HashMap<>();
 
     public Order() {
@@ -32,7 +22,6 @@ public class Order {
         this.name = name;
         this.date = new java.util.Date();
         this.type = type;
-        this.totalPrice = getTotalPrice(orderedProducts);
     }
 
     public void saveOrderToFile() {

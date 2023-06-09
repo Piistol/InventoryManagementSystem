@@ -23,7 +23,7 @@ public class DBTest {
     }
 
     public void test() {
-        populateTables();
+        //populateTables();
         retrieveData();
     }
 
@@ -47,7 +47,7 @@ public class DBTest {
             ResultSet rsProduct = statement.executeQuery("SELECT * FROM PRODUCT");
             System.out.println("Data in PRODUCT table:");
             while (rsProduct.next()) {
-                System.out.println("ID: " + rsProduct.getString("ID") + ", Name: " + rsProduct.getString("NAME") 
+                System.out.println("Name: " + rsProduct.getString("NAME") 
                     + ", Price: " + rsProduct.getDouble("PRICE") + ", Weight: " + rsProduct.getDouble("WEIGHT"));
             }
 

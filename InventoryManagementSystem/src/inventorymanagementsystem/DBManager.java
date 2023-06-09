@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package inventorymanagementsystem;
 
 import java.sql.*;
@@ -30,7 +25,7 @@ public class DBManager {
             try {
                 connection = DriverManager.getConnection(URL, "", "");
                 statement = connection.createStatement();
-                System.out.println(URL + " Get Connected Successfully ....");
+                System.out.println(URL + " Connected Successfully ....");
                 createTables();
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
@@ -58,9 +53,9 @@ public class DBManager {
             if (!tableExists("PRODUCT")) {
                 statement.execute("CREATE TABLE PRODUCT(NAME VARCHAR(35), PRICE DOUBLE PRECISION, WEIGHT DOUBLE PRECISION, QUANTITY INTEGER)");
                 connection.commit();
-                System.out.println("Product table created");
+                System.out.println("PRODUCT table created");
             } else {
-                System.out.println("Product table already exists");
+                System.out.println("PRODUCT table already exists");
             }
 
             if (!tableExists("APP_USER")) {
@@ -72,6 +67,7 @@ public class DBManager {
             }
         } catch (SQLException ex) {
             System.out.println("SQL exception: " + ex.getMessage());
+            System.out.println("Tables already created.");
         }
     }
 
@@ -80,12 +76,7 @@ public class DBManager {
             DatabaseMetaData dbm = connection.getMetaData();
 
             ResultSet tables = dbm.getTables(null, null, tableName.toUpperCase(), null);
-            while (tables.next()) {
-                System.out.println(tables.getString("TABLE_CAT"));
-                System.out.println(tables.getString("TABLE_SCHEM"));
-                System.out.println(tables.getString("TABLE_NAME"));
-                System.out.println(tables.getString("TABLE_TYPE"));
-            }
+
             if (tables.next()) {
                 // Table exists
                 return true;
@@ -98,11 +89,5 @@ public class DBManager {
             ex.printStackTrace();
             return false;
         }
-    }
-
-    public static void main(String[] args) {
-        DBManager dbManager = new DBManager();
-        System.out.println(dbManager.getConnection());
-        dbManager.closeConnections();
     }
 }
