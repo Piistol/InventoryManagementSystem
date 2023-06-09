@@ -65,7 +65,10 @@ public class OrdersController {
             // Get the current quantity of the product in the order, if it exists
             int currentProductOrderQuantity = currentOrder.getItemQuantity(selectedProductName);
 
-            if (selectedProduct.getCurrentQuantity() >= quantityToOrder + currentProductOrderQuantity) {
+            // Check if this is a purchase order. If so, do not check for enough quantity.
+            boolean isPurchaseOrder = ordersGUI.getPurchaseOrderButton().isSelected();
+
+            if (isPurchaseOrder || selectedProduct.getCurrentQuantity() >= quantityToOrder + currentProductOrderQuantity) {
                 // Add the selected product to the order
                 currentOrder.addItem(selectedProductName, quantityToOrder);
 

@@ -1,5 +1,6 @@
 Order Name: Liam
-Order Type: Sales
+Order Type: Purchase
 Order Date: 09/06/2023
 Ordered Products:
-Order Total: 0.0
+Name: Tissues, Quantity: 20
+Order Total: 100.0
