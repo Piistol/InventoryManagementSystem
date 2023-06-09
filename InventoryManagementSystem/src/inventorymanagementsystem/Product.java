@@ -56,6 +56,22 @@ public class Product {
         return this.quantity;
     }
 
+    public int getCurrentQuantity() {
+        String query = "SELECT QUANTITY FROM PRODUCT WHERE NAME = ?";
+        try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(query)) {
+            stmt.setString(1, this.name);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("QUANTITY");
+            } else {
+                throw new SQLException("Product not found");
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            return -1;
+        }
+    }
+
     @Override
     public String toString() {
         return "Product{"
@@ -192,7 +208,7 @@ public class Product {
         }
         return 0;
     }
-    
+
     public static int getTotalWeight() {
         String query = "SELECT SUM(WEIGHT) AS TOTAL FROM PRODUCT";
         try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(query)) {
@@ -204,6 +220,31 @@ public class Product {
             System.out.println(ex.getMessage());
         }
         return 0;
+    }
+
+    public void reduceQuantity(int quantity) {
+        if (this.quantity >= quantity) {
+            this.quantity -= quantity;
+            updateQuantityInDatabase();
+        } else {
+            System.out.println("Insufficient quantity.");
+        }
+    }
+
+    public void addQuantity(int quantity) {
+        this.quantity += quantity;
+        updateQuantityInDatabase();
+    }
+
+    private void updateQuantityInDatabase() {
+        String query = "UPDATE PRODUCT SET QUANTITY = ? WHERE NAME = ?";
+        try (PreparedStatement stmt = dbManager.getConnection().prepareStatement(query)) {
+            stmt.setInt(1, this.quantity);
+            stmt.setString(2, this.name);
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
 }
