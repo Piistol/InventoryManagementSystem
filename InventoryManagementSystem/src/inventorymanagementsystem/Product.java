@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package inventorymanagementsystem;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author GGPC
- */
 public class Product {
 
     private String name;
@@ -22,6 +13,16 @@ public class Product {
     private static DBManager dbManager = DBManager.getInstance();
 
     public Product(String name, double price, double weight, int quantity) {
+        if (price < 0) {
+            throw new IllegalArgumentException("Price cannot be negative.");
+        }
+        if (weight < 0) {
+            throw new IllegalArgumentException("Weight cannot be negative.");
+        }
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity cannot be negative.");
+        }
+
         this.name = name;
         this.price = price;
         this.weight = weight;
@@ -41,6 +42,9 @@ public class Product {
     }
 
     public void setPrice(double price) {
+        if (price < 0) {
+            throw new IllegalArgumentException("Price cannot be negative.");
+        }
         this.price = price;
     }
 
@@ -49,6 +53,9 @@ public class Product {
     }
 
     public void setWeight(double weight) {
+        if (weight < 0) {
+            throw new IllegalArgumentException("Weight cannot be negative.");
+        }
         this.weight = weight;
     }
 
@@ -223,6 +230,9 @@ public class Product {
     }
 
     public void reduceQuantity(int quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity to reduce cannot be negative.");
+        }
         if (this.quantity >= quantity) {
             this.quantity -= quantity;
             updateQuantityInDatabase();
@@ -232,6 +242,9 @@ public class Product {
     }
 
     public void addQuantity(int quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity to add cannot be negative.");
+        }
         this.quantity += quantity;
         updateQuantityInDatabase();
     }

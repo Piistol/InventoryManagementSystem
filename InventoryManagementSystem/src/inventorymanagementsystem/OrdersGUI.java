@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package inventorymanagementsystem;
 
-/**
- *
- * @author GGPC
- */
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
@@ -80,6 +71,11 @@ public class OrdersGUI {
         // Fetch the products from the database
         List<Product> products = Product.getAllProducts();
 
+        if (products.isEmpty()) {
+            JOptionPane.showMessageDialog(frame, "No products available.", "Empty Inventory", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
 // Create an array to hold the product names
         String[] productNames = new String[products.size()];
 
@@ -94,7 +90,7 @@ public class OrdersGUI {
 
         JLabel quantityLabel = new JLabel("Quantity:");
         topPanel.add(quantityLabel);
-        
+
         quantityField = new JTextField(2);
         topPanel.add(quantityField);
 

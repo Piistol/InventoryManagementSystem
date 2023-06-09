@@ -5,10 +5,6 @@
  */
 package inventorymanagementsystem;
 
-/**
- *
- * @author GGPC
- */
 import javax.swing.*;
 
 public class MainMenuGUI {
@@ -34,7 +30,7 @@ public class MainMenuGUI {
 
     private void initialize() {
         frame = new JFrame();
-        frame.setBounds(75, 100, 300, 400); // Increase the height to fit the additional buttons
+        frame.setBounds(75, 100, 300, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
@@ -79,6 +75,3 @@ public class MainMenuGUI {
         return frame;
     }
 }
-
-
-

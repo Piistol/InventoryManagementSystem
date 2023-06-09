@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package inventorymanagementsystem;
 
 import javax.swing.*;
 
-/**
- *
- * @author GGPC
- */
 public class ProductController {
 
     private MainMenuGUI mainMenuGUI;
@@ -33,9 +24,36 @@ public class ProductController {
 
     private void addProduct() {
         String name = productGUI.getNameFieldText();
-        double price = Double.parseDouble(productGUI.getPriceFieldText());
-        double weight = Double.parseDouble(productGUI.getWeightFieldText());
-        int quantity = Integer.parseInt(productGUI.getQuantityFieldText());
+        double price;
+        double weight;
+        int quantity;
+
+        try {
+            price = Double.parseDouble(productGUI.getPriceFieldText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(productGUI.getFrame(), "Invalid price format. Please enter a valid number.");
+            return;
+        }
+
+        try {
+            weight = Double.parseDouble(productGUI.getWeightFieldText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(productGUI.getFrame(), "Invalid weight format. Please enter a valid number.");
+            return;
+        }
+
+        try {
+            quantity = Integer.parseInt(productGUI.getQuantityFieldText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(productGUI.getFrame(), "Invalid quantity format. Please enter a valid number.");
+            return;
+        }
+
+        // Check for negative values
+        if (price < 0 || weight < 0 || quantity < 0) {
+            JOptionPane.showMessageDialog(productGUI.getFrame(), "Price, weight and quantity cannot be negative. Please enter valid values.");
+            return;
+        }
 
         // Create a new Product
         Product product = new Product(name, price, weight, quantity);
@@ -63,13 +81,13 @@ public class ProductController {
             JOptionPane.showMessageDialog(productGUI.getFrame(), "Could not find product to remove. Please try again.");
         }
     }
-    
+
     private void searchProduct() {
-        
+
         String name = productGUI.getNameFieldText();
-        
+
         Product product = Product.searchProduct(name);
-        
+
         if (product != null) {
             JOptionPane.showMessageDialog(productGUI.getFrame(), product.toString());
         } else {

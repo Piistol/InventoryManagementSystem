@@ -49,7 +49,8 @@ public class LoginController {
                 return false;
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(loginGUI.getFrame(), "An error occurred while checking credentials.");
+            e.printStackTrace();
         }
 
         return false;
@@ -70,7 +71,9 @@ public class LoginController {
                 return;
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(loginGUI.getFrame(), "An error occurred while registering.");
+            e.printStackTrace();
+            return;
         }
 
         String insertSql = "INSERT INTO APP_USER (USERNAME, PASSWORD) VALUES (?, ?)";

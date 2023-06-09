@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package inventorymanagementsystem;
 
 import java.awt.Desktop;
@@ -13,15 +8,14 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author GGPC
- */
 public class OrdersController {
 
     private MainMenuGUI mainMenuGUI;
     private OrdersGUI ordersGUI;
     private Order currentOrder;
+
+    private static final String ORDER_TYPE_SALES = "Sales";
+    private static final String ORDER_TYPE_PURCHASE = "Purchase";
 
     public OrdersController() {
         mainMenuGUI = MainMenuGUI.getInstance();
@@ -64,28 +58,32 @@ public class OrdersController {
         }
 
         String selectedProductName = (String) ordersGUI.getItemsDropdown().getSelectedItem();
-        int quantityToOrder = Integer.parseInt(ordersGUI.getQuantityField().getText());
-        Product selectedProduct = Product.searchProduct(selectedProductName);
+        try {
+            int quantityToOrder = Integer.parseInt(ordersGUI.getQuantityField().getText());
+            Product selectedProduct = Product.searchProduct(selectedProductName);
 
-        // Get the current quantity of the product in the order, if it exists
-        int currentProductOrderQuantity = currentOrder.getItemQuantity(selectedProductName);
+            // Get the current quantity of the product in the order, if it exists
+            int currentProductOrderQuantity = currentOrder.getItemQuantity(selectedProductName);
 
-        if (selectedProduct.getCurrentQuantity() >= quantityToOrder + currentProductOrderQuantity) {
-            // Add the selected product to the order
-            currentOrder.addItem(selectedProductName, quantityToOrder);
+            if (selectedProduct.getCurrentQuantity() >= quantityToOrder + currentProductOrderQuantity) {
+                // Add the selected product to the order
+                currentOrder.addItem(selectedProductName, quantityToOrder);
 
-            // Update the order items list
-            DefaultListModel<String> listModel = new DefaultListModel<>();
-            for (HashMap.Entry<String, Integer> entry : currentOrder.getItems().entrySet()) {
-                listModel.addElement(entry.getKey() + ": " + entry.getValue());
+                // Update the order items list
+                DefaultListModel<String> listModel = new DefaultListModel<>();
+                for (HashMap.Entry<String, Integer> entry : currentOrder.getItems().entrySet()) {
+                    listModel.addElement(entry.getKey() + ": " + entry.getValue());
+                }
+                ordersGUI.getOrderItemsList().setModel(listModel);
+            } else {
+                // Show error message
+                JOptionPane.showMessageDialog(ordersGUI.getFrame(),
+                        "Not enough quantity available for " + selectedProduct.getName(),
+                        "Insufficient Quantity",
+                        JOptionPane.ERROR_MESSAGE);
             }
-            ordersGUI.getOrderItemsList().setModel(listModel);
-        } else {
-            // Show error message
-            JOptionPane.showMessageDialog(ordersGUI.getFrame(),
-                    "Not enough quantity available for " + selectedProduct.getName(),
-                    "Insufficient Quantity",
-                    JOptionPane.ERROR_MESSAGE);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(ordersGUI.getFrame(), "Please enter a valid quantity.", "Invalid Input", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -116,11 +114,11 @@ public class OrdersController {
         String orderType = null;
 
         if (ordersGUI.getSalesOrderButton().isSelected()) {
-            orderType = "Sales";
+            orderType = ORDER_TYPE_SALES;
         }
 
         if (ordersGUI.getPurchaseOrderButton().isSelected()) {
-            orderType = "Purchase";
+            orderType = ORDER_TYPE_PURCHASE;
         }
 
         // Validate order name and type
@@ -147,9 +145,9 @@ public class OrdersController {
         for (HashMap.Entry<String, Integer> entry : order.getItems().entrySet()) {
             Product product = Product.searchProduct(entry.getKey());
             if (product != null) {
-                if (orderType.equals("Sales")) {
+                if (orderType.equals(ORDER_TYPE_SALES)) {
                     product.reduceQuantity(entry.getValue());
-                } else if (orderType.equals("Purchase")) {
+                } else if (orderType.equals(ORDER_TYPE_PURCHASE)) {
                     product.addQuantity(entry.getValue());
                 }
             }
