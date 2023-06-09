@@ -76,15 +76,15 @@ public class OrdersGUI {
             return;
         }
 
-// Create an array to hold the product names
+        // Create an array to hold the product names
         String[] productNames = new String[products.size()];
 
-// Populate the array with product names
+        // Populate the array with product names
         for (int i = 0; i < products.size(); i++) {
             productNames[i] = products.get(i).getName();
         }
 
-// Create the dropdown list with the product names
+        // Create the dropdown list with the product names
         itemsDropdown = new JComboBox<>(productNames);
         topPanel.add(itemsDropdown);
 

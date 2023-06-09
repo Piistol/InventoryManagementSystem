@@ -10,7 +10,6 @@ public class InventoryGUI {
 
     private JFrame frame;
     private JButton mainMenuButton;
-    private JButton displayInventoryButton;
     private JTable productTable;
     private JTextArea inventoryReport;
 
